@@ -101,15 +101,17 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>All models should implement two methods: matches and parse.
-The method matches should accept a single text line as input and should return false or true.
-False means that the model does not fit the given line. Thus if a method .matches( line) called on a model
-named Footnote returns falls, this means the given text is not a footnote.</p>
+    <p>All models should implement two methods: <span class='object_link'><a href="#matches-instance_method" title="Model#matches (method)">#matches</a></span> and #parse.
+The method <span class='object_link'><a href="#matches-instance_method" title="Model#matches (method)">#matches</a></span> should accept a single text line as input and
+should return false or true. False means that the model does not fit the given
+line.</p>
 
-<h1>does this header</h1>
+<p>Thus if a method <span class='object_link'><a href="FootNote.html#matches-instance_method" title="FootNote#matches (method)">FootNote#matches</a></span> is called on a model amed Footnote and it
+returns falls, this means the given text is not a footnote.</p>
 
-<p>The methods &#39;parse&#39; takes a multiline string and returns an array that for each line holds
-a value of either the model&#39;s name if the model fits that line, or NIL if not.</p>
+<p>The method <span class='object_link'><a href="#visit-instance_method" title="Model#visit (method)">#visit</a></span> takes a multiline [String] and returns an
+[Array<Object>] that for each line holds a value of either the model&#39;s name
+if the model fits that line, or NIL if not.</p>
 
 
   </div>
@@ -139,7 +141,7 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#matches-instance_method" title="#matches (instance method)">- (Object) <strong>matches</strong>(line) </a>
+      <a href="#matches-instance_method" title="#matches (instance method)">- (Boolean, true) <strong>matches</strong>(line) </a>
     
 
     
@@ -153,7 +155,7 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns true if the model fits the give string &#39;line&#39;.</p>
+    <span class="summary_desc"><div class='inline'><p>Determines if the model matches a line of text.</p>
 </div></span>
   
 </li>
@@ -162,7 +164,7 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#parse-instance_method" title="#parse (instance method)">- (Object) <strong>parse</strong>(text) </a>
+      <a href="#visit-instance_method" title="#visit (instance method)">- (Array&lt;Object&gt;) <strong>visit</strong>(text) </a>
     
 
     
@@ -176,7 +178,7 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Parses a multiline text and returns an array contained per line a value of either the model&#39;s name (class) or NIL if the model saw no fit with the given line.</p>
+    <span class="summary_desc"><div class='inline'><p>Visits a multiline text.</p>
 </div></span>
   
 </li>
@@ -194,7 +196,7 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
       <div class="method_details first">
   <h3 class="signature first" id="matches-instance_method">
   
-    - (<tt>Object</tt>) <strong>matches</strong>(line) 
+    - (<tt>Boolean</tt>, <tt>true</tt>) <strong>matches</strong>(line) 
   
 
   
@@ -202,14 +204,49 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if the model fits the give string &#39;line&#39;.
-&#39;line&#39; is assumed to be a single line of text.</p>
+    <p>Determines if the model matches a line of text.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>line</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>assumed to be a single line of text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>true</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the model fits the give string &#39;line&#39;.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -217,12 +254,12 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
       <pre class="lines">
 
 
-15
-16
-17</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span>
   <span class='kw'>false</span>
@@ -233,9 +270,9 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="parse-instance_method">
+  <h3 class="signature " id="visit-instance_method">
   
-    - (<tt>Object</tt>) <strong>parse</strong>(text) 
+    - (<tt>Array&lt;Object&gt;</tt>) <strong>visit</strong>(text) 
   
 
   
@@ -243,15 +280,49 @@ a value of either the model&#39;s name if the model fits that line, or NIL if no
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Parses a multiline text and returns an array contained per line
-a value of either the model&#39;s name (class) or NIL if the model
-saw no fit with the given line.</p>
+    <p>Visits a multiline text</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>multiline text</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>containing per line a value of either the model&#39;s name (class) or NIL if the model saw no fit with the given line.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -259,8 +330,6 @@ saw no fit with the given line.</p>
       <pre class="lines">
 
 
-22
-23
 24
 25
 26
@@ -269,12 +338,14 @@ saw no fit with the given line.</p>
 29
 30
 31
-32</pre>
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span> <span class='id identifier rubyid_text'>text</span> <span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_visit'>visit</span><span class='lparen'>(</span> <span class='id identifier rubyid_text'>text</span> <span class='rparen'>)</span>
   <span class='id identifier rubyid_matches'>matches</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span>
@@ -295,7 +366,7 @@ saw no fit with the given line.</p>
 </div>
 
     <div id="footer">
-  Generated on Wed May 11 20:47:00 2016 by
+  Generated on Thu May 12 00:40:11 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.0).
 </div>

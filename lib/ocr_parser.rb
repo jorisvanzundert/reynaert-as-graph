@@ -1,54 +1,54 @@
+# @author Joris J. van Zundert
+
 require_relative "ocr_parse_models"
 
-# OCRParser takes a text (OCRParser.new.text="a text" or .load_text( text )) and splits it on line breakds.
-# Each line is matched to all the models provided. A Model tests if a line of text fits that model or not.
+# OCRParser takes a text and splits it on line breaks.
+# Each line is matched to all the models provided.
+# A Model tests if a line of text fits that model or not.
 class OCRParser
 
+  # @param models [Array<Model>] the models to match against each line of the text
+  attr_accessor :models
+
+  # @param text [String] the text to be parsed as a string
   def text=( text )
     @text = text
     @lines = text.split( "\n" )
   end
 
+  # @param file_path [String] the path to the file having the text to be parsed
   def load_text( file_path )
     self.text = File.read( file_path )
   end
 
+  # Used by models to iterate over all lines for matching.
   def each_line
-    @lines.each_with_index do |item, index|
-      if index == 0
-        yield item, nil, @lines[1]
-      elsif index == @lines.size - 1
-        yield item, @lines[-2], nil
-      else
-        yield item, @lines[index-1], @lines[index+1]
-      end
-    end
+    @lines.each{ |line| yield line }
   end
 
+  # Used by models to iterate over all lines for matching, when context is needed.
+  # Context is provided as 10 lines before and after the current line.
   def each_line_with_context
     @lines.each_with_index do |line,index|
       yield line, @lines[(index-10)..(index-1)].reverse, @lines[(index+1)..(index+10)]
     end
   end
 
-  def match_lines( models )
+  # Delegates matching to the models.
+  # yields each line [String] and its matches [Array]
+  def match_lines
     matches = []
-    models.each { |model| matches.push( model.parse( self ) ) }
+    @models.each { |model| matches.push( model.visit( self ) ) }
     matches = matches.transpose
     @lines.each_with_index do |line, index|
-      matches[index] = [line, matches[index].compact]
+      yield line, matches[index].compact
     end
-    matches
   end
 
   def parse_to_annotated_array
-    models = [ Empty.new, Numbers.new, FootNote.new, AllCaps.new, English.new ]
     result = []
     context = Context.new
-    matchinfo = match_lines( models )
-    matchinfo.each do |lineinfo|
-      matches = lineinfo[1]
-      line = lineinfo[0]
+    match_lines do |line, matches|
       if matches.include?( FootNote )
         context.pop
         context.push( FootNote )

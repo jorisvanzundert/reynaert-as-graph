@@ -85,16 +85,19 @@ class TestIntegration < Test::Unit::TestCase
   def test_small_text
     small_text = OCRParser.new
     small_text.text = "THIS IS AN ALL CAPS LINE\nThis is not"
-    model = AllCaps.new
-    assert_equal( [["THIS IS AN ALL CAPS LINE", [AllCaps]], ["This is not", []]], small_text.match_lines( [model] ) )
+    small_text.models = [ AllCaps.new ]
+    result = []
+    small_text.match_lines{ |line, matches| result << [line, matches] }
+    assert_equal( [["THIS IS AN ALL CAPS LINE", [AllCaps]], ["This is not", []]], result )
   end
 
   def test_another_small_text
     small_text = OCRParser.new
     small_text.text = "THIS IS AN ALL CAPS LINE\n123 This is footnote"
-    all_caps_model = AllCaps.new
-    footnote_model = FootNote.new
-    assert_equal( [["THIS IS AN ALL CAPS LINE", [AllCaps]], ["123 This is footnote", [FootNote]]], small_text.match_lines( [ all_caps_model, footnote_model ] ) )
+    small_text.models = [ AllCaps.new, FootNote.new ]
+    result = []
+    small_text.match_lines{ |line, matches| result << [line, matches] }
+    assert_equal( [["THIS IS AN ALL CAPS LINE", [AllCaps]], ["123 This is footnote", [FootNote]]], result )
   end
 
 end

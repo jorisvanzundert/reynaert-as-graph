@@ -103,10 +103,12 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>Matches a line that is likely to be english.
-Uses a list of English stopwords (of which a number of words are taken out as they might be Middledutch as well).
-A word that may be English or Middledutch will count towards English at a weight of 0.4 (instead of the ful 1.0).
-A (default) treshold regulates that if more than 20% of the words in a line are recognized as English stopwords, the line is probably English.</p>
+    <p>Matches a line that is likely to be english. Uses a list of English stopwords
+(of which a number of words are taken out as they might be Middledutch as
+well). A word that may be English or Middledutch will count towards English at
+a weight of 0.4 (instead of the ful 1.0). A (default) treshold regulates that
+if more than 20% of the words in a line are recognized as English stopwords,
+the line is probably English.</p>
 
 
   </div>
@@ -158,28 +160,6 @@ A (default) treshold regulates that if more than 20% of the words in a line are 
   <span class="summary_signature">
     
       <a href="#matches-instance_method" title="#matches (instance method)">- (Object) <strong>matches</strong>(line) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#parse-instance_method" title="#parse (instance method)">- (Object) <strong>parse</strong>(text) </a>
     
 
     
@@ -265,6 +245,28 @@ A (default) treshold regulates that if more than 20% of the words in a line are 
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#visit-instance_method" title="#visit (instance method)">- (Object) <strong>visit</strong>(text) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -302,15 +304,15 @@ A (default) treshold regulates that if more than 20% of the words in a line are 
       <pre class="lines">
 
 
-81
-82
-83
-84
 85
-86</pre>
+86
+87
+88
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@may_be_middle_dutch</span> <span class='op'>=</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>an</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>as</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>been</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>by</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>have</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>he</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>her</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>here</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>i</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>in</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>is</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>me</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mine</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>no</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>so</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>over</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>was</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>we</span><span class='tstring_end'>&quot;</span></span> <span class='rbracket'>]</span>
@@ -345,12 +347,12 @@ A (default) treshold regulates that if more than 20% of the words in a line are 
       <pre class="lines">
 
 
-111
-112
-113</pre>
+114
+115
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span>
   <span class='id identifier rubyid_score'>score</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span> <span class='op'>&gt;</span> <span class='ivar'>@treshold</span>
@@ -361,9 +363,9 @@ A (default) treshold regulates that if more than 20% of the words in a line are 
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="parse-instance_method">
+  <h3 class="signature " id="score-instance_method">
   
-    - (<tt>Object</tt>) <strong>parse</strong>(text) 
+    - (<tt>Object</tt>) <strong>score</strong>(string) 
   
 
   
@@ -375,9 +377,140 @@ A (default) treshold regulates that if more than 20% of the words in a line are 
       <pre class="lines">
 
 
-115
-116
-117
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 103</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_score'>score</span><span class='lparen'>(</span> <span class='id identifier rubyid_string'>string</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_score'>score</span> <span class='op'>=</span> <span class='float'>0.0</span>
+  <span class='id identifier rubyid_tokens'>tokens</span> <span class='op'>=</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\s+</span><span class='regexp_end'>/</span></span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_tokens'>tokens</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_token'>token</span><span class='op'>|</span>
+    <span class='id identifier rubyid_stripped'>stripped</span> <span class='op'>=</span> <span class='id identifier rubyid_strip_embracing_punctuation'>strip_embracing_punctuation</span><span class='lparen'>(</span> <span class='id identifier rubyid_token'>token</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_score'>score</span> <span class='op'>+=</span> <span class='float'>1.0</span> <span class='kw'>if</span> <span class='ivar'>@stopwords</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_stripped'>stripped</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_score'>score</span> <span class='op'>+=</span> <span class='float'>0.4</span> <span class='kw'>if</span> <span class='ivar'>@may_be_middle_dutch</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_stripped'>stripped</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_score'>score</span><span class='op'>/</span><span class='id identifier rubyid_tokens'>tokens</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="strip_embracing_punctuation-instance_method">
+  
+    - (<tt>Object</tt>) <strong>strip_embracing_punctuation</strong>(token) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_strip_embracing_punctuation'>strip_embracing_punctuation</span><span class='lparen'>(</span> <span class='id identifier rubyid_token'>token</span> <span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>[\.:;&#39;“‘’”?!\(\),]+$|^[\.:;&#39;“‘’”?!\(\),]+</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="treshold=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>treshold=</strong>(new_treshold) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets treshold, 0.2 (20%) by default.
+English</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_treshold</span>
+      
+      
+        <span class='type'>(<tt>Real</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>ratio of English words needed to classify a line as</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_treshold='>treshold=</span><span class='lparen'>(</span> <span class='id identifier rubyid_new_treshold'>new_treshold</span> <span class='rparen'>)</span>
+  <span class='ivar'>@treshold</span> <span class='op'>=</span> <span class='id identifier rubyid_new_treshold'>new_treshold</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="visit-instance_method">
+  
+    - (<tt>Object</tt>) <strong>visit</strong>(text) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
 118
 119
 120
@@ -399,12 +532,15 @@ A (default) treshold regulates that if more than 20% of the words in a line are 
 136
 137
 138
-139</pre>
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 118</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span> <span class='id identifier rubyid_text'>text</span> <span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_visit'>visit</span><span class='lparen'>(</span> <span class='id identifier rubyid_text'>text</span> <span class='rparen'>)</span>
   <span class='id identifier rubyid_matches'>matches</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_each_line_with_context'>each_line_with_context</span> <span class='kw'>do</span> <span class='op'>|</span> <span class='id identifier rubyid_line'>line</span><span class='comma'>,</span> <span class='id identifier rubyid_prev'>prev</span><span class='comma'>,</span> <span class='id identifier rubyid_succ'>succ</span> <span class='op'>|</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span>
@@ -434,132 +570,12 @@ A (default) treshold regulates that if more than 20% of the words in a line are 
 </table>
 </div>
     
-      <div class="method_details ">
-  <h3 class="signature " id="score-instance_method">
-  
-    - (<tt>Object</tt>) <strong>score</strong>(string) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 97</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_score'>score</span><span class='lparen'>(</span> <span class='id identifier rubyid_string'>string</span> <span class='rparen'>)</span>
-  <span class='id identifier rubyid_score'>score</span> <span class='op'>=</span> <span class='float'>0.0</span>
-  <span class='id identifier rubyid_tokens'>tokens</span> <span class='op'>=</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\s+</span><span class='regexp_end'>/</span></span> <span class='rparen'>)</span>
-  <span class='id identifier rubyid_tokens'>tokens</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_token'>token</span><span class='op'>|</span>
-    <span class='id identifier rubyid_stripped'>stripped</span> <span class='op'>=</span> <span class='id identifier rubyid_strip_embracing_punctuation'>strip_embracing_punctuation</span><span class='lparen'>(</span> <span class='id identifier rubyid_token'>token</span> <span class='rparen'>)</span>
-    <span class='id identifier rubyid_score'>score</span> <span class='op'>+=</span> <span class='float'>1.0</span> <span class='kw'>if</span> <span class='ivar'>@stopwords</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_stripped'>stripped</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='rparen'>)</span>
-    <span class='id identifier rubyid_score'>score</span> <span class='op'>+=</span> <span class='float'>0.4</span> <span class='kw'>if</span> <span class='ivar'>@may_be_middle_dutch</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_stripped'>stripped</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_eql?'>eql?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Prologue</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>score: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_score'>score</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-  <span class='id identifier rubyid_score'>score</span><span class='op'>/</span><span class='id identifier rubyid_tokens'>tokens</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span><span class='lparen'>(</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="strip_embracing_punctuation-instance_method">
-  
-    - (<tt>Object</tt>) <strong>strip_embracing_punctuation</strong>(token) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-93
-94
-95</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 93</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_strip_embracing_punctuation'>strip_embracing_punctuation</span><span class='lparen'>(</span> <span class='id identifier rubyid_token'>token</span> <span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>[\.:;&#39;“‘’”?!\(\),]+$|^[\.:;&#39;“‘’”?!\(\),]+</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="treshold=-instance_method">
-  
-    - (<tt>Object</tt>) <strong>treshold=</strong>(new_treshold) 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p>Sets treshold, 0.2 (20%) by default.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-89
-90
-91</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 89</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_treshold='>treshold=</span><span class='lparen'>(</span> <span class='id identifier rubyid_new_treshold'>new_treshold</span> <span class='rparen'>)</span>
-  <span class='ivar'>@treshold</span> <span class='op'>=</span> <span class='id identifier rubyid_new_treshold'>new_treshold</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
   </div>
 
 </div>
 
     <div id="footer">
-  Generated on Wed May 11 20:47:00 2016 by
+  Generated on Thu May 12 00:40:11 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.0).
 </div>

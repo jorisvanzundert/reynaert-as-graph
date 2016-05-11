@@ -8,6 +8,7 @@ class TestParser < Test::Unit::TestCase
     gold_standard = CSV.read( "fixtures/gold_standard.csv" )
     text = OCRParser.new
     text.load_text( 'editions/Bouwman, André/Of Reynaert the Fox_ Text and /Bouwman_ Of Reynaert the Fox.txt' )
+    text.models = [ Empty.new, Numbers.new, FootNote.new, AllCaps.new, English.new ]
     parsed = text.parse_to_annotated_array()
     mismatches = []
     for i in 0..gold_standard.size - 1

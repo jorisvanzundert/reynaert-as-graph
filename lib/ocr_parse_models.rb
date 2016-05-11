@@ -1,25 +1,27 @@
-# All models should implement two methods: matches and parse.
-# The method matches should accept a single text line as input and should return false or true.
-# False means that the model does not fit the given line. Thus if a method .matches( line) called on a model
-# named Footnote returns falls, this means the given text is not a footnote.
+# All models should implement two methods: {Model#matches} and {Model#parse}.
+# The method {Model#matches} should accept a single text line as input and
+# should return false or true. False means that the model does not fit the given
+# line.
 #
-# does this header
-# ============
+# Thus if a method {FootNote#matches} is called on a model amed Footnote and it
+# returns falls, this means the given text is not a footnote.
 #
-# The methods 'parse' takes a multiline string and returns an array that for each line holds
-# a value of either the model's name if the model fits that line, or NIL if not.
+# The method {Model#visit} takes a multiline [String] and returns an
+# [Array<Object>] that for each line holds a value of either the model's name
+# if the model fits that line, or NIL if not.
 class Model
 
-  # Returns true if the model fits the give string 'line'.
-  # 'line' is assumed to be a single line of text.
+  # Determines if the model matches a line of text.
+  # @param line [String] assumed to be a single line of text
+  # @return [Boolean, true] if the model fits the give string 'line'.
   def matches( line )
     false
   end
 
-  # Parses a multiline text and returns an array contained per line
-  # a value of either the model's name (class) or NIL if the model
-  # saw no fit with the given line.
-  def parse( text )
+  # Visits a multiline text
+  # @param text [String] multiline text
+  # @return [Array<Object>] containing per line a value of either the model's name (class) or NIL if the model saw no fit with the given line.
+  def visit( text )
     matches = []
     text.each_line do |line|
       if matches( line )
@@ -53,8 +55,8 @@ class FootNote < Model
 
 end
 
-# Matches a line containing only numbers.
-# 'o' is also accepted as the OCR frequently misreads 0 for o.
+# Matches a line containing only numbers. 'o' (lower case letter o) is also
+# accepted as the OCR frequently misreads 0 for o.
 class Numbers < Model
 
   def matches( line )
@@ -63,7 +65,7 @@ class Numbers < Model
 
 end
 
-# Matches an empty line
+# Matches an empty line.
 class Empty < Model
 
   def matches( line )
@@ -72,10 +74,12 @@ class Empty < Model
 
 end
 
-# Matches a line that is likely to be english.
-# Uses a list of English stopwords (of which a number of words are taken out as they might be Middledutch as well).
-# A word that may be English or Middledutch will count towards English at a weight of 0.4 (instead of the ful 1.0).
-# A (default) treshold regulates that if more than 20% of the words in a line are recognized as English stopwords, the line is probably English.
+# Matches a line that is likely to be english. Uses a list of English stopwords
+# (of which a number of words are taken out as they might be Middledutch as
+# well). A word that may be English or Middledutch will count towards English at
+# a weight of 0.4 (instead of the ful 1.0). A (default) treshold regulates that
+# if more than 20% of the words in a line are recognized as English stopwords,
+# the line is probably English.
 class English < Model
 
   def initialize
@@ -86,6 +90,8 @@ class English < Model
   end
 
   # Sets treshold, 0.2 (20%) by default.
+  # @param new_treshold [Real] ratio of English words needed to classify a line as
+  # English
   def treshold=( new_treshold )
     @treshold = new_treshold
   end
@@ -102,9 +108,6 @@ class English < Model
       score += 1.0 if @stopwords.include?( stripped.downcase )
       score += 0.4 if @may_be_middle_dutch.include?( stripped.downcase )
     end
-    if string.eql?("Prologue")
-      puts "score: #{score}"
-    end
     score/tokens.size()
   end
 
@@ -112,7 +115,7 @@ class English < Model
     score( line ) > @treshold
   end
 
-  def parse( text )
+  def visit( text )
     matches=[]
     text.each_line_with_context do | line, prev, succ |
       if matches( line )
