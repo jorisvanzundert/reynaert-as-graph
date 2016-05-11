@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: English
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!English.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (E)</a> &raquo;
+    
+    
+    <span class="title">English</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: English
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="Model.html" title="Model (class)">Model</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Model.html" title="Model (class)">Model</a></span></li>
+          
+            <li class="next">English</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/ocr_parse_models.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Matches a line that is likely to be english. Uses a list of English
+stopwords (of which a number of words are taken out as they might be
+Middledutch as well). A word that may be English or Middledutch will count
+towards English at a weight of 0.4 (instead of the ful 1.0). A (default)
+treshold regulates that if more than 20% of the words in a line are
+recognized as English stopwords, the line is probably English.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (English) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of English.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#matches-instance_method" title="#matches (instance method)">- (Object) <strong>matches</strong>(line) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse-instance_method" title="#parse (instance method)">- (Object) <strong>parse</strong>(text) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#score-instance_method" title="#score (instance method)">- (Object) <strong>score</strong>(string) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strip_embracing_punctuation-instance_method" title="#strip_embracing_punctuation (instance method)">- (Object) <strong>strip_embracing_punctuation</strong>(token) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#treshold%3D-instance_method" title="#treshold= (instance method)">- (Object) <strong>treshold=</strong>(new_treshold) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets treshold, 0.2 (20%) by default.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="English (class)">English</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of English</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+  <span class='ivar'>@may_be_middle_dutch</span> <span class='op'>=</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>an</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>as</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>been</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>by</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>have</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>he</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>her</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>here</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>i</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>in</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>is</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>me</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mine</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>no</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>so</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>over</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>was</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>we</span><span class='tstring_end'>&quot;</span></span> <span class='rbracket'>]</span>
+  <span class='ivar'>@hints</span> <span class='op'>=</span> <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>prologue</span><span class='tstring_end'>&quot;</span></span> <span class='rbracket'>]</span>
+  <span class='ivar'>@stopwords</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>./fixtures/stopwords_en.txt</span><span class='tstring_end'>&#39;</span></span> <span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span> <span class='op'>-</span> <span class='ivar'>@may_be_middle_dutch</span> <span class='op'>+</span> <span class='ivar'>@hints</span>
+  <span class='ivar'>@treshold</span> <span class='op'>=</span> <span class='float'>0.2</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="matches-instance_method">
+  
+    - (<tt>Object</tt>) <strong>matches</strong>(line) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+111
+112
+113</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 111</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_score'>score</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span> <span class='op'>&gt;</span> <span class='ivar'>@treshold</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parse-instance_method">
+  
+    - (<tt>Object</tt>) <strong>parse</strong>(text) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 115</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span> <span class='id identifier rubyid_text'>text</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_matches'>matches</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_each_line_with_context'>each_line_with_context</span> <span class='kw'>do</span> <span class='op'>|</span> <span class='id identifier rubyid_line'>line</span><span class='comma'>,</span> <span class='id identifier rubyid_prev'>prev</span><span class='comma'>,</span> <span class='id identifier rubyid_succ'>succ</span> <span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span>
+      <span class='id identifier rubyid_matches'>matches</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_empty_model'>empty_model</span> <span class='op'>=</span> <span class='const'>Empty</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+      <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_empty_model'>empty_model</span><span class='period'>.</span><span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span>
+        <span class='comment'># Post correction, if in between two english matches, it probably should be matched too
+</span>        <span class='id identifier rubyid_prev'>prev</span><span class='period'>.</span><span class='id identifier rubyid_reject!'>reject!</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span> <span class='id identifier rubyid_empty_model'>empty_model</span><span class='period'>.</span><span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span> <span class='rbrace'>}</span>
+        <span class='id identifier rubyid_succ'>succ</span><span class='period'>.</span><span class='id identifier rubyid_reject!'>reject!</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span> <span class='id identifier rubyid_empty_model'>empty_model</span><span class='period'>.</span><span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_line'>line</span> <span class='rparen'>)</span> <span class='rbrace'>}</span>
+        <span class='id identifier rubyid_previous_matches'>previous_matches</span> <span class='op'>=</span> <span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_prev'>prev</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_prev'>prev</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+        <span class='id identifier rubyid_next_matches'>next_matches</span> <span class='op'>=</span> <span class='id identifier rubyid_matches'>matches</span><span class='lparen'>(</span> <span class='id identifier rubyid_succ'>succ</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_succ'>succ</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+        <span class='kw'>if</span> <span class='id identifier rubyid_previous_matches'>previous_matches</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_next_matches'>next_matches</span>
+          <span class='id identifier rubyid_matches'>matches</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='rparen'>)</span>
+        <span class='kw'>else</span>
+          <span class='id identifier rubyid_matches'>matches</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span> <span class='kw'>nil</span> <span class='rparen'>)</span>
+        <span class='kw'>end</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_matches'>matches</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span> <span class='kw'>nil</span> <span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_matches'>matches</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="score-instance_method">
+  
+    - (<tt>Object</tt>) <strong>score</strong>(string) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_score'>score</span><span class='lparen'>(</span> <span class='id identifier rubyid_string'>string</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_score'>score</span> <span class='op'>=</span> <span class='float'>0.0</span>
+  <span class='id identifier rubyid_tokens'>tokens</span> <span class='op'>=</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\s+</span><span class='regexp_end'>/</span></span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_tokens'>tokens</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_token'>token</span><span class='op'>|</span>
+    <span class='id identifier rubyid_stripped'>stripped</span> <span class='op'>=</span> <span class='id identifier rubyid_strip_embracing_punctuation'>strip_embracing_punctuation</span><span class='lparen'>(</span> <span class='id identifier rubyid_token'>token</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_score'>score</span> <span class='op'>+=</span> <span class='float'>1.0</span> <span class='kw'>if</span> <span class='ivar'>@stopwords</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_stripped'>stripped</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_score'>score</span> <span class='op'>+=</span> <span class='float'>0.4</span> <span class='kw'>if</span> <span class='ivar'>@may_be_middle_dutch</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='id identifier rubyid_stripped'>stripped</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_string'>string</span><span class='period'>.</span><span class='id identifier rubyid_eql?'>eql?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Prologue</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>score: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_score'>score</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_score'>score</span><span class='op'>/</span><span class='id identifier rubyid_tokens'>tokens</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span><span class='lparen'>(</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="strip_embracing_punctuation-instance_method">
+  
+    - (<tt>Object</tt>) <strong>strip_embracing_punctuation</strong>(token) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 93</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_strip_embracing_punctuation'>strip_embracing_punctuation</span><span class='lparen'>(</span> <span class='id identifier rubyid_token'>token</span> <span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_token'>token</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>[\.:;&#39;“‘’”?!\(\),]+$|^[\.:;&#39;“‘’”?!\(\),]+</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="treshold=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>treshold=</strong>(new_treshold) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets treshold, 0.2 (20%) by default.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ocr_parse_models.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_treshold='>treshold=</span><span class='lparen'>(</span> <span class='id identifier rubyid_new_treshold'>new_treshold</span> <span class='rparen'>)</span>
+  <span class='ivar'>@treshold</span> <span class='op'>=</span> <span class='id identifier rubyid_new_treshold'>new_treshold</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed May 11 17:40:32 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.3.0).
+</div>
+
+  </body>
+</html>
