@@ -45,6 +45,10 @@ class OCRParser
     end
   end
 
+  # This needs to be adjusted (and that adjustment should go into the notebook).
+  # The problem is that the knowledge that the footnote model may stretch
+  # multiple lines is now embeddd in this method, but it should be knowledge
+  # of the model and that can be 'handed' to the parser.
   def parse_to_annotated_array
     result = []
     context = Context.new
