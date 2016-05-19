@@ -64,10 +64,10 @@ class TestModels < Test::Unit::TestCase
     assert_equal( 3.4/7, score )
     match = english_model.matches( "who always thinks he knows it all." )
     assert_true( match)
-    english_model.treshold = 0.5
+    english_model.threshold = 0.5
     match = english_model.matches( "who always thinks he knows it all." )
     assert_false( match)
-    english_model.treshold = 0.2
+    english_model.threshold = 0.2
     score = english_model.score( "die gherne pleghen der eeren" )
     assert_equal( 0, score )
     match = english_model.matches( "die gherne pleghen der eeren" )
