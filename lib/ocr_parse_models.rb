@@ -13,6 +13,8 @@
 # if the model fits that line, or NIL if not.
 class Model
 
+  attr_accessor :line_context
+
   # Determines if the model matches a line of text.
   # @param line [String] assumed to be a single line of text
   # @return [Boolean, true] if the model fits the give string 'line'.
@@ -20,61 +22,51 @@ class Model
     false
   end
 
-  # Visits a multiline text
-  # @param text [String] multiline text
-  # @return [Array<Object>] containing per line a value of either the model's name (class) or NIL if the model saw no fit with the given line.
-  def visit( text )
-    matches = []
-    text.each_line do |line|
-      if matches( line )
-        matches.push( self.class )
-      else
-        matches.push( nil )
-      end
-    end
-    matches
+end
+
+
+# Matches a line that only contains capitals.
+class AllCaps < Model
+
+  def matches( line )
+    # string.match( /^[^a-z]+$/ ) != nil
+    # string.match( /^[\p{Lu}+|\s]+$/ ) != nil
+    !!line.match( /[[:upper:]]/ ) && !!!line.match( /[[:lower:]]/ )
   end
 
 end
 
-  # Matches a line that only contains capitals.
-  class AllCaps < Model
 
-    def matches( line )
-      # string.match( /^[^a-z]+$/ ) != nil
-      # string.match( /^[\p{Lu}+|\s]+$/ ) != nil
-      !!line.match( /[[:upper:]]/ ) && !!!line.match( /[[:lower:]]/ )
-    end
+# Matches a line starting with at least one digit, followed by a dash or a space.
+class FootNote < Model
 
+  def matches( line )
+    line.match( /^\d+(-| )(.+)$/ ) != nil
   end
 
-  # Matches a line starting with at least one digit, followed by a dash or a space.
-  class FootNote < Model
+end
 
-    def matches( line )
-      line.match( /^\d+(-| )(.+)$/ ) != nil
-    end
 
+# Matches a line containing only numbers. 'o' (lower case letter o) is also
+# accepted as the OCR frequently misreads 0 for o.
+class Numbers < Model
+
+  def matches( line )
+    line.match( /^[\do]+$/ ) != nil
   end
 
-  # Matches a line containing only numbers. 'o' (lower case letter o) is also
-  # accepted as the OCR frequently misreads 0 for o.
-  class Numbers < Model
+end
 
-    def matches( line )
-      line.match( /^[\do]+$/ ) != nil
-    end
 
+# Matches an empty line.
+class Empty < Model
+
+  def matches( line )
+    line.match( /^\s*$/ ) != nil
   end
 
-  # Matches an empty line.
-  class Empty < Model
+end
 
-    def matches( line )
-      line.match( /^\s*$/ ) != nil
-    end
-
-  end
 
 # Matches a line that is likely to be english. Uses a list of English stopwords
 # (of which a number of words are taken out as they might be Middledutch as
@@ -113,34 +105,38 @@ class English < Model
     score/tokens.size()
   end
 
-  def matches( line )
+  def above_treshold( line )
     score( line ) > @threshold
   end
 
-  def visit( text )
-    matches=[]
-    text.each_line_with_context do | line, prev, succ |
-      if matches( line )
-        matches.push( self.class )
-      else
-        empty_model = Empty.new
-        if !empty_model.matches( line )
-          # Post correction, if in between two english matches, it probably should be matched too
-          prev.reject! { |line| empty_model.matches( line ) }
-          succ.reject! { |line| empty_model.matches( line ) }
-          previous_matches = matches( prev[0] ) if prev.size > 0
-          next_matches = matches( succ[0] ) if succ.size > 0
-          if previous_matches && next_matches
-            matches.push( self.class )
-          else
-            matches.push( nil )
-          end
-        else
-          matches.push( nil )
-        end
+  def matches( line )
+    match = above_treshold( line )
+    if @line_context != nil && !match
+      empty_model = Empty.new
+      if !empty_model.matches( line )
+        # Post correction, if in between two english matches, it probably should be matched too
+        prev = @line_context.previous_lines.reject { |line| empty_model.matches( line ) }
+        succ = @line_context.next_lines.reject { |line| empty_model.matches( line ) }
+        previous_matches = above_treshold( prev[0] ) if prev.size > 0
+        next_matches = above_treshold( succ[0] ) if succ.size > 0
+        match = true if (previous_matches && next_matches)
       end
     end
-    matches
+    match
+  end
+
+end
+
+
+class LineContext
+
+  attr_reader :previous_lines
+  attr_reader :next_lines
+
+  def initialize( lines, index )
+    reversed_index = lines.size - index
+    @previous_lines = lines.reverse()[reversed_index,10]
+    @next_lines = lines[index+1,10]
   end
 
 end

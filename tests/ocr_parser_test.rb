@@ -23,22 +23,3 @@ class TestParser < Test::Unit::TestCase
   end
 
 end
-
-class TestLine < Test::Unit::TestCase
-
-  def test_parse_line
-    line = ParseLine.new( "new line", true )
-    assert_equal( "new line", line.line )
-    assert_equal( true, line.accepted )
-  end
-end
-
-class TestContext < Test::Unit::TestCase
-
-  def test_push_last
-    context = Context.new
-    context.push( "something" )
-    assert_equal( "something", context.last )
-  end
-
-end

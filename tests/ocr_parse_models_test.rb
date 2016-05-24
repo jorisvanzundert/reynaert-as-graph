@@ -47,6 +47,20 @@ class TestModels < Test::Unit::TestCase
     assert_false( empty_model.matches( "    231 Babilonien" ) )
   end
 
+end
+
+
+class TestLineContext < Test::Unit::TestCase
+
+  def test_line_context
+    asert(false)
+  end
+
+end
+
+
+class TestEnglishModel < Test::Unit::TestCase
+
   def test_english_model
     english_model = English.new
     # match 'to', 'at', and 'this'
@@ -63,10 +77,10 @@ class TestModels < Test::Unit::TestCase
     score = english_model.score( "who always thinks he knows it all." )
     assert_equal( 3.4/7, score )
     match = english_model.matches( "who always thinks he knows it all." )
-    assert_true( match)
+    assert_true( match )
     english_model.threshold = 0.5
     match = english_model.matches( "who always thinks he knows it all." )
-    assert_false( match)
+    assert_false( match )
     english_model.threshold = 0.2
     score = english_model.score( "die gherne pleghen der eeren" )
     assert_equal( 0, score )
@@ -78,7 +92,43 @@ class TestModels < Test::Unit::TestCase
     assert_false( match )
   end
 
+  def test_english_multiline
+    lines = [ "this is an english line\n" ]
+    lines.push( "die door een Nederlandse wordt gevolgd\n" )
+    lines.push( "that is followed by yet another english line\n" )
+    english_model = English.new
+    assert_true( english_model.matches( lines[0] ) )
+    assert_false( english_model.matches( lines[1] ) )
+    assert_true( english_model.matches( lines[2] ) )
+    line_context = LineContext.new( lines, 1 )
+    english_model.line_context = line_context
+    assert_true( english_model.matches( lines[0] ) )
+    assert_true( english_model.matches( lines[1] ) )
+    assert_true( english_model.matches( lines[2] ) )
+    lines = [ "Maar dit is wel Nederlands\n" ]
+    lines.push( "die door een Nederlandse wordt gevolgd\n" )
+    lines.push( "that is followed by yet another english line\n" )
+    line_context = LineContext.new( lines, 1 )
+    english_model.line_context = line_context
+    assert_false( english_model.matches( lines[0] ) )
+    assert_false( english_model.matches( lines[1] ) )
+    assert_true( english_model.matches( lines[2] ) )
+  end
+
+  def test_english_not_enough_context
+    lines = [ "Dit is een Nederlandse regel\n" ]
+    lines.push( "that is followed by another english line\n" )
+    line_context = LineContext.new( lines, 0 )
+    english_model = English.new
+    assert_false( english_model.matches( lines[0] ) )
+    assert_true( english_model.matches( lines[1] ) )
+    english_model.line_context = line_context
+    assert_false( english_model.matches( lines[0] ) )
+    assert_true( english_model.matches( lines[1] ) )
+  end
+
 end
+
 
 class TestIntegration < Test::Unit::TestCase
 

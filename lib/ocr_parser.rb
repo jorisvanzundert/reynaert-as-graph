@@ -21,27 +21,16 @@ class OCRParser
     self.text = File.read( file_path )
   end
 
-  # Used by models to iterate over all lines for matching.
-  def each_line
-    @lines.each{ |line| yield line }
-  end
-
-  # Used by models to iterate over all lines for matching, when context is needed.
-  # Context is provided as 10 lines before and after the current line.
-  def each_line_with_context
-    @lines.each_with_index do |line,index|
-      yield line, @lines[(index-10)..(index-1)].reverse, @lines[(index+1)..(index+10)]
-    end
-  end
-
-  # Delegates matching to the models.
-  # yields each line [String] and its matches [Array]
   def match_lines
-    matches = []
-    @models.each { |model| matches.push( model.visit( self ) ) }
-    matches = matches.transpose
-    @lines.each_with_index do |line, index|
-      yield line, matches[index].compact
+    @lines.each_with_index do |line,index|
+      matches = []
+      @models.each do |model|
+        model.line_context = LineContext.new( @lines, index )
+        if model.matches( line )
+          matches.push( model.class )
+        end
+      end
+      yield line, matches
     end
   end
 
@@ -51,7 +40,7 @@ class OCRParser
   # of the model and that can be 'handed' to the parser.
   def parse_to_annotated_array
     result = []
-    context = Context.new
+    context = []
     match_lines do |line, matches|
       if matches.include?( FootNote )
         context.pop
@@ -77,38 +66,6 @@ class OCRParser
     raw = parse_to_annotated_array()
     raw.reject! { |annotated_line| annotated_line[0] == "I" }
     raw.map! { |annotated_line| annotated_line[1] }
-  end
-
-end
-
-class ParseLine
-
-  attr_reader :line
-  attr_reader :accepted
-
-  def initialize( line, accepted )
-    @line = line
-    @accepted = accepted
-  end
-
-end
-
-class Context
-
-  def initialize
-    @context = []
-  end
-
-  def push( state )
-    @context.push( state )
-  end
-
-  def pop
-    @context.pop
-  end
-
-  def last
-    @context.last
   end
 
 end
