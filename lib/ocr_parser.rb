@@ -22,7 +22,7 @@ class OCRParser
   end
 
   def match_lines
-    @lines.each_with_index do |line,index|
+    @lines.each_with_index do |line, index|
       matches = []
       @models.each do |model|
         model.line_context = LineContext.new( @lines, index )
@@ -34,38 +34,29 @@ class OCRParser
     end
   end
 
-  # This needs to be adjusted (and that adjustment should go into the notebook).
-  # The problem is that the knowledge that the footnote model may stretch
-  # multiple lines is now embeddd in this method, but it should be knowledge
-  # of the model and that can be 'handed' to the parser.
-  def parse_to_annotated_array
-    result = []
-    context = []
+  def parse_tuples
+    active_multiline_models = []
     match_lines do |line, matches|
-      if matches.include?( FootNote )
-        context.pop
-        context.push( FootNote )
-      end
-      if matches.include?( AllCaps )
-        context.pop
-      end
-      if context.last != FootNote
-        if matches.size() == 0
-          result.push( [ "A", line, matches ] )
-        else
-          result.push( [ "I", line, matches ] )
+      matches.each do |model|
+        active_multiline_models.reject! do |active_multiline_model|
+          active_multiline_model.terminators.include? model
         end
+        if model.terminators != nil
+          active_multiline_models.push( model )
+        end
+      end
+      if matches.size == 0 && active_multiline_models.size == 0
+        yield true, line, matches
       else
-        result.push( [ "I", line, matches ] )
+        yield false, line, matches
       end
     end
-    result
   end
 
   def parse
-    raw = parse_to_annotated_array()
-    raw.reject! { |annotated_line| annotated_line[0] == "I" }
-    raw.map! { |annotated_line| annotated_line[1] }
+    tuples = []
+    parse_tuples { | accept, line | tuples.push tuple if accept }
+    tuples
   end
 
 end

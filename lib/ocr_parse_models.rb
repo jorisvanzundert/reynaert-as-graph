@@ -6,8 +6,22 @@
 #
 # Thus if a method {FootNote#matches} is called on a model amed Footnote and it
 # returns false, this means the given text is not a footnote.
+#
+# Models apply to lines of text by default (i.e. a line break signals the end
+# of the applicability of the model). If a model span potentially multiple lines
+# terminators can be registered. A terminator is any other model that
+# invalidates the application of the current model
 class Model
 
+  # A class instance variable that holds list [Array] of classes that terminates
+  # this model. 
+  @terminators = nil
+  def self.terminators
+    @terminators
+  end
+
+  # @param line_context [LineContext] provides context information for this
+  # model
   attr_accessor :line_context
 
   # Determines if the model matches a line of text.
@@ -34,6 +48,8 @@ end
 
 # Matches a line starting with at least one digit, followed by a dash or a space.
 class FootNote < Model
+
+  @terminators = [ AllCaps ]
 
   def matches( line )
     line.match( /^\d+(-| )(.+)$/ ) != nil

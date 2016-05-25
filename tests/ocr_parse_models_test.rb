@@ -175,3 +175,21 @@ class TestIntegration < Test::Unit::TestCase
   end
 
 end
+
+
+class TestTerminators < Test::Unit::TestCase
+
+  # Ensure that model have Class level method to get
+  # terminators, not instance level.
+  def test_terminators
+    model = Model.new
+    assert_equal( nil, Model.terminators )
+    begin
+      model.terminators
+    rescue Exception => exception
+      assert_true( exception.message.include? "undefined method" )
+    end
+    assert_equal( [AllCaps], FootNote.terminators )
+  end
+
+end
