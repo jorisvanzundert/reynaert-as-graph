@@ -53,7 +53,31 @@ end
 class TestLineContext < Test::Unit::TestCase
 
   def test_line_context
-    asert(false)
+    lines = (0..34).to_a
+    index = 0
+    line_context = LineContext.new( lines, index )
+    assert_equal( [], line_context.previous_lines )
+    assert_equal( [1,2,3,4,5,6,7,8,9,10], line_context.next_lines )
+    index = 1
+    line_context = LineContext.new( lines, index )
+    assert_equal( [0], line_context.previous_lines )
+    assert_equal( [2,3,4,5,6,7,8,9,10,11], line_context.next_lines )
+    index = 4
+    line_context = LineContext.new( lines, index )
+    assert_equal( [3,2,1,0], line_context.previous_lines )
+    assert_equal( [5,6,7,8,9,10,11,12,13,14], line_context.next_lines )
+    index = 10
+    line_context = LineContext.new( lines, index )
+    assert_equal( [9,8,7,6,5,4,3,2,1,0], line_context.previous_lines )
+    assert_equal( [11,12,13,14,15,16,17,18,19,20], line_context.next_lines )
+    index = 28
+    line_context = LineContext.new( lines, index )
+    assert_equal( [27,26,25,24,23,22,21,20,19,18], line_context.previous_lines )
+    assert_equal( [29,30,31,32,33,34], line_context.next_lines )
+    index = 34
+    line_context = LineContext.new( lines, index )
+    assert_equal( [33,32,31,30,29,28,27,26,25,24], line_context.previous_lines )
+    assert_equal( [], line_context.next_lines )
   end
 
 end

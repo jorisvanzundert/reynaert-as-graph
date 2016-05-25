@@ -1,16 +1,11 @@
 # @author Joris J. van Zundert
 
-# All models should implement two methods: {Model#matches} and {Model#parse}.
-# The method {Model#matches} should accept a single text line as input and
-# should return false or true. False means that the model does not fit the given
-# line.
+# All models should implement the method {Model#matches}. It should accept a
+# single text line as input and should return false or true. False meaning
+# that the model does not fit the given line.
 #
 # Thus if a method {FootNote#matches} is called on a model amed Footnote and it
-# returns falls, this means the given text is not a footnote.
-#
-# The method {Model#visit} takes a multiline [String] and returns an
-# [Array<Object>] that for each line holds a value of either the model's name
-# if the model fits that line, or NIL if not.
+# returns false, this means the given text is not a footnote.
 class Model
 
   attr_accessor :line_context
