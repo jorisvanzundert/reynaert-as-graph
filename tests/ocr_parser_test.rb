@@ -7,7 +7,7 @@ class TestParser < Test::Unit::TestCase
   def test_parser_to_gold_standard
     gold_standard = CSV.read( "fixtures/gold_standard.csv" )
     text = OCRParser.new
-    text.load_text( 'fixtures/Bouwman_ Of Reynaert the Fox.txt' )
+    text.load_text( 'fixtures/Bouwman_ Of Reynaert the Fox_42-52.txt' )
     text.models = [ Empty.new, Numbers.new, FootNote.new, AllCaps.new, English.new ]
     i = 0
     text.parse_tuples do | accept, line |
@@ -18,7 +18,7 @@ class TestParser < Test::Unit::TestCase
 
   def test_parser
     text = OCRParser.new
-    text.load_text( "fixtures/Bouwman_ Of Reynaert the Fox.txt" )
+    text.load_text( "fixtures/Bouwman_ Of Reynaert the Fox_42-52.txt" )
     text.models = [ Empty.new, Numbers.new, FootNote.new, AllCaps.new, English.new ]
     i = 0
     lines = text.parse()
