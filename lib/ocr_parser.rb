@@ -55,7 +55,7 @@ class OCRParser
 
   def parse
     tuples = []
-    parse_tuples { | accept, line | tuples.push tuple if accept }
+    parse_tuples { | accept, line | tuples.push line if accept }
     tuples
   end
 
