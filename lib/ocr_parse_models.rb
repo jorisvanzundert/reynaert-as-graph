@@ -14,7 +14,7 @@
 class Model
 
   # A class instance variable that holds list [Array] of classes that terminates
-  # this model. 
+  # this model.
   @terminators = nil
   def self.terminators
     @terminators
@@ -89,8 +89,9 @@ class English < Model
 
   def initialize
     @may_be_middle_dutch = [ "an", "as", "been", "by", "have", "he", "her", "here", "i", "in", "is", "me", "mine", "no", "so", "over", "was", "we" ]
-    @hints = [ "prologue" ]
-    @stopwords = File.read( './fixtures/stopwords_en.txt' ).split( "\n" ) - @may_be_middle_dutch + @hints
+    @hints = [ "prologue", "ofone" ]
+
+    @stopwords = File.read( File.join(File.dirname(__FILE__), '../fixtures/stopwords_en.txt') ).split( "\n" ) - @may_be_middle_dutch + @hints
     @threshold = 0.2
   end
 
