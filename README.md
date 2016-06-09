@@ -4,4 +4,4 @@ This is the code base that was used in an experiment in slow coding and computer
 
 The code was developed specifically to parse the OCRed text of the scholarly edition of "Of Reynaert the Fox" by André Bouwman and Bart Besamusca, and to represent the text of the Dutch Medieval novel as an OO model.
 
-In [lib/ocr_parser](lib/ocr_parser.rb) you will find the {OCRParser} class, which is probably a good place to start exploring this package. The OCRParser is setup according to a visitor pattern which should allow—with some limited coding—for reuse and adaption for other projects.
+In [lib/ocr_parser](lib/ocr_parser.rb) you will find the {OCRParser} class, which is probably a good place to start exploring this package. The OCRParser is setup according to a simple model iteration pattern which should allow—with some limited coding—for reuse and adaption for other projects.
